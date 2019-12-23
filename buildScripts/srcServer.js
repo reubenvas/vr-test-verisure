@@ -25,7 +25,7 @@ app.listen(PORT, (err) => {
 });
 
 // tools to expose the local app publically, SHARINGWORK-IN-PROGRESS
-// * localtunnel - verkar jäkligt easy, punch a whole in your firewall
+// * localtunnel - verkar jäkligt easy, punch a whole in your firewall --verkar inte funka här
 // * ngrok - som localtunnel fast med lösenordsskydd
 // * now - man kan ladda upp vilket direcxtory som helst bara det finns en package.json
 // * Surge - som now men supportar bara static files, men är jäkligt simpelt. Inte som localtunnel utan man hostar filer på ett public URL

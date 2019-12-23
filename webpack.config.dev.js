@@ -62,7 +62,7 @@ export default {
         {
             // also, it is handling the .CSS files for us.
             test: /\.css$/,
-            loader: ['style', 'css']
+            loader: ['style-loader', 'css-loader']
         }]
     },
 }
