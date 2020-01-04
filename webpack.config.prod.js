@@ -2,15 +2,16 @@
 // 'require' is changed to 'import from'
 import path from 'path';
 import webpack from 'webpack';
+// import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-
 
 // Webpack is configured by 'export'ing an object
 export default {
     // 'debug' was removed in webpack 2.0.0
     // debug: true,
     // 'devtool' has been set to inline-source-map, source-map ones are for higher quality
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     // Setting 'noInfo' to false means that Webpack will display the list of all the files
     // that it is bundling. Best to set this to TRUE during PROD, as it adds a lot of noise
     // noInfo, not available for webpack 2.0.0 or higher
@@ -20,7 +21,7 @@ export default {
     // Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
     // You can also set it to 'none' to disable any default behavior.
     // Learn more: https://webpack.js.org/concepts/mode/
-    mode: 'development',
+    mode: 'production',
 
     // This is the entry point of the Webpack
     entry: [
@@ -39,7 +40,7 @@ export default {
     // but will serve the build from memory.
     // But while definig the output, the path and file names are specified to Webpack
     output: {
-        path: path.resolve(__dirname, 'src'),
+        path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
         filename: 'bundle.js',
     },
@@ -54,13 +55,56 @@ export default {
         // Create HTML file that includes reference to bundled JS.
         new HtmlWebpackPlugin({
             template: 'src/index.html',
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true,
+            },
             inject: true,
         }),
         new webpack.LoaderOptionsPlugin({
             debug: true,
             noInfo: false,
         }),
+        // Eliminate duplicate packages when generating bundle
+        // new webpack.optimize.DedupePlugin(),
+        // Minify JS
+        // new UglifyJsPlugin({
+        //     compress:
+        //     {
+        //         warnings: true,
+        //     },
+        //     sourceMap: true,
+        // }),
+        new TerserPlugin({
+            cache: true,
+            parallel: true,
+            sourceMap: true,
+        }),
     ],
+    optimization: {
+        minimizer: [
+            // we specify a custom UglifyJsPlugin here to get source maps in production
+            // new UglifyJsPlugin({
+            //     cache: true,
+            //     parallel: true,
+            //     uglifyOptions: {
+            //         compress: false,
+            //         ecma: 6,
+            //         mangle: true,
+            //     },
+            //     sourceMap: true,
+            // }),
+        ],
+    },
+
 
     // This informs Webpack about the file types that we wish to handle
     module: {

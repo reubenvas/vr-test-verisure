@@ -6,7 +6,11 @@ describe('index.html', () => {
         const index = fs.readFileSync('./src/index.html', 'utf8');
         const dom = new JSDOM(index);
         const h1 = dom.window.document.querySelector('h1');
-        expect(h1.innerHTML).toBe('Tjenare');
+        if (h1 === null) {
+            expect(h1).not.toBeNull();
+        } else {
+            expect(h1.innerHTML).toBe('Tjenare');
+        }
         dom.window.close();
     });
 });

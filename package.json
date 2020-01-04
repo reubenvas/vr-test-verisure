@@ -5,7 +5,7 @@
     "scripts": {
         "startMessage": "babel-node buildScripts/startMessage.js",
         "prestart:dev": "npm-run-all --parallel startMessage ",
-        "start:dev": "npm-run-all --parallel open:src lint:watch type-check:watch test:watch",
+        "start:dev": "npm-run-all --parallel open:src lint:watch type-check:watch test:watch start-mockapi",
         "start": "npm run start:dev -s",
         "open:src": "babel-node buildScripts/srcServer.js",
         "lint": "esw . --ext .js --ext .ts webpack.config.* src buildScripts --color",
@@ -14,13 +14,21 @@
         "type-check:watch": "npm run type-check -- --watch",
         "test": "jest --reporter=progress",
         "test:watch": "npm test -- --watch",
+        "generate-mock-data": "babel-node buildScripts/generateMockData",
+        "prestart-mockapi": "npm run generate-mock-data",
+        "start-mockapi": "json-server --watch src/api/db.json --port 3001",
         "localtunnel": "lt --port 3000",
         "share": "npm-run-all --parallel open:src localtunnel",
-        "update-dependancy-versions": "ncu -u || npx npm-check-updates -u"
+        "update-dependancy-versions": "ncu -u || npx npm-check-updates -u",
+        "clean-dist": "rimraf ./dist && mkdir dist",
+        "prebuild": "npm-run-all clean-dist test lint",
+        "build": "babel-node buildScripts/build.js",
+        "postbuild": "babel-node buildScripts/distServer.js"
     },
     "author": "Cory House",
     "license": "MIT",
     "dependencies": {
+        "faker": "^4.1.0",
         "whatwg-fetch": "3.0.0"
     },
     "devDependencies": {
@@ -67,8 +75,10 @@
         "rimraf": "3.0.0",
         "style-loader": "1.1.1",
         "surge": "0.21.3",
+        "terser-webpack-plugin": "^2.3.1",
         "ts-loader": "^6.2.1",
         "typescript": "^3.7.4",
+        "uglifyjs-webpack-plugin": "^2.2.0",
         "webpack": "^4.41.4",
         "webpack-dev-middleware": "3.7.2",
         "webpack-hot-middleware": "2.25.0",
