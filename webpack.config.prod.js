@@ -2,7 +2,6 @@
 // 'require' is changed to 'import from'
 import path from 'path';
 import webpack from 'webpack';
-// import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
@@ -24,12 +23,13 @@ export default {
     mode: 'production',
 
     // This is the entry point of the Webpack
-    entry: [
+    entry: {
         // Not doing a hot-reloading at this point and just keeping it simple to the SRC/Index
         // using __dirname, which is part of node.js, which will give the full path here.
         // also using the 'path' package, which also comes with node.js and has been imported above
-        path.resolve(__dirname, 'src/index.ts'),
-    ],
+        // some_file_name: path.resolve(__dirname, 'src/vendor'),
+        main: path.resolve(__dirname, 'src/index.ts'),
+    },
 
     // The target of the Webpack bundle for our current purpose is the web.
     // It could also be 'node', or 'elektron' for desktop apps
@@ -42,7 +42,7 @@ export default {
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
-        filename: 'bundle.js',
+        filename: '[name].js', // [name] is a placeholder - webpack will use what's defined in the entry point
     },
     resolve: {
         extensions: [
@@ -52,6 +52,11 @@ export default {
 
     // define any plug-ins, if they are to be used - hot-reloading, linting, caching, styles, etc.
     plugins: [
+        // Use CommonChunkPlugin to create a separate bundle
+        // of vendor libraries os that they're cached separetly.
+        // new webpack.SplitChunksPlugin({
+        //     name: 'vendor', // has to be the same as in config.entry
+        // }),
         // Create HTML file that includes reference to bundled JS.
         new HtmlWebpackPlugin({
             template: 'src/index.html',
@@ -87,6 +92,8 @@ export default {
             cache: true,
             parallel: true,
             sourceMap: true,
+            terserOptions: {
+            },
         }),
     ],
     optimization: {
@@ -103,6 +110,22 @@ export default {
             //     sourceMap: true,
             // }),
         ],
+        splitChunks: {
+            cacheGroups: {
+                default: false,
+                vendors: false,
+
+                // vendor chunk
+                vendor: {
+                    // name of the chunk
+                    name: 'vendor',
+                    // sync + async chunks
+                    chunks: 'all',
+                    // import file path containing node_modules
+                    test: /[\\/]node_modules[\\/]/,
+                },
+            },
+        },
     },
 
 

@@ -21,14 +21,13 @@
         "share": "npm-run-all --parallel open:src localtunnel",
         "update-dependancy-versions": "ncu -u || npx npm-check-updates -u",
         "clean-dist": "rimraf ./dist && mkdir dist",
-        "prebuild": "npm-run-all clean-dist test lint",
+        "prebuild": "npm-run-all clean-dist type-check lint test ",
         "build": "babel-node buildScripts/build.js",
         "postbuild": "babel-node buildScripts/distServer.js"
     },
-    "author": "Cory House",
-    "license": "MIT",
+    "author": "Reuben Vas",
+    "license": "",
     "dependencies": {
-        "faker": "^4.1.0",
         "whatwg-fetch": "3.0.0"
     },
     "devDependencies": {
@@ -61,6 +60,7 @@
         "eslint-watch": "6.0.1",
         "express": "4.17.1",
         "extract-text-webpack-plugin": "3.0.2",
+        "faker": "^4.1.0",
         "html-webpack-plugin": "3.2.0",
         "jest": "^24.9.0",
         "jsdom": "15.2.1",
