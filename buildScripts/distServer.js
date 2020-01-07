@@ -20,6 +20,7 @@ app.listen(PORT, (err) => {
     if (err) throw err;
     // eslint-disable-next-line no-console
     console.log('Running on port:', PORT);
+    console.log('greetings from env-variables:', process.env.TEST_GREETING);
     open(`http://localhost:${PORT}`);
 });
 

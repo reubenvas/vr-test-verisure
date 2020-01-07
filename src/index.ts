@@ -7,6 +7,7 @@ import { deleteUser, getUsers } from './api/userApi';
 const courseValue = generateCourseValue(1000);
 // eslint-disable-next-line no-console
 console.log(`I would pay ${courseValue} for this awesome course`);
+console.log('env variable', process.env.TEST_GREETING);
 
 export default generateCourseValue;
 

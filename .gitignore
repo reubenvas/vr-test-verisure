@@ -1,3 +1,5 @@
 node_modules
 dist/*
 src/api/db.json
+.env.*
+!.env.example

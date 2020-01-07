@@ -4,6 +4,8 @@ import path from 'path';
 import webpack from 'webpack';
 import TerserPlugin from 'terser-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import Dotenv from 'dotenv-webpack';
+
 
 // Webpack is configured by 'export'ing an object
 export default {
@@ -94,6 +96,10 @@ export default {
             sourceMap: true,
             terserOptions: {
             },
+        }),
+        // Makes sure the environment variables is available in the window
+        new Dotenv({
+            path: `./.env.${process.env.NODE_ENV === 'production' ? 'prod' : 'dev'}`,
         }),
     ],
     optimization: {

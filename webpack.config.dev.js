@@ -3,7 +3,9 @@
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import Dotenv from 'dotenv-webpack';
 
+console.log('WEBPACK DEV');
 
 // Webpack is configured by 'export'ing an object
 export default {
@@ -59,6 +61,9 @@ export default {
         new webpack.LoaderOptionsPlugin({
             debug: true,
             noInfo: false,
+        }),
+        new Dotenv({
+            path: `./.env.${process.env.NODE_ENV === 'production' ? 'prod' : 'dev'}`,
         }),
     ],
 
