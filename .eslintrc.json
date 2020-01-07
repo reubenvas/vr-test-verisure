@@ -28,13 +28,13 @@
             "error",
             4
         ],
-        "no-use-before-define": [
-            "error",
-            {
-                // "functions": false,
-                // "variables": false
-            }
-        ],
+        // "no-use-before-define": [
+        //     "error",
+        //     {
+        //         // "functions": false,
+        //         // "variables": false
+        //     }
+        // ],
         "@typescript-eslint/no-use-before-define": [
             "error",
             {
@@ -52,6 +52,7 @@
                 "tsx": "never"
             }
         ]
+        // "prefer-default-export": "warning"
     },
     "settings": {
         "import/resolver": {

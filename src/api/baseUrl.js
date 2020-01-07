@@ -1,4 +1,4 @@
 export default () => {
-    const inDevelopment = window.location.hostname === 'localhost';
+    const inDevelopment = process.env.NODE_ENV === 'development';
     return inDevelopment ? 'http://localhost:3001/' : '/';
 };
