@@ -99,7 +99,7 @@ export default {
         }),
         // Makes sure the environment variables is available in the window
         new Dotenv({
-            path: `./.env.${process.env.NODE_ENV === 'production' ? 'prod' : 'dev'}`,
+            path: `./config/.env.${process.env.NODE_ENV === 'production' ? 'prod' : 'dev'}`,
         }),
     ],
     optimization: {

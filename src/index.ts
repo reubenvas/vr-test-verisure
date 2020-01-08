@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import './index.css';
 import generateCourseValue from './courseValue';
-import { deleteUser, getUsers } from './api/userApi';
+import { /* deleteUser, */ getUsers } from './api/userApi';
 
 // debugger; For souremaps to find
 const courseValue = generateCourseValue(1000);
@@ -27,7 +27,8 @@ getUsers().then((result) => {
 
     document.querySelector('#users')!.innerHTML = usersBody;
 
-    const deleteLinks = document.querySelectorAll('.deleteUser');
+
+    const deleteLinks = document.querySelectorAll('.deleteUser'); // eslint-disable-line @typescript-eslint/no-unused-vars
 
     // [...deleteLinks].forEach((link) => {
     //     link.onclick = (event: Event): void => {

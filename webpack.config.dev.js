@@ -5,8 +5,6 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
 
-console.log('WEBPACK DEV');
-
 // Webpack is configured by 'export'ing an object
 export default {
     // 'debug' was removed in webpack 2.0.0
@@ -35,6 +33,7 @@ export default {
     // The target of the Webpack bundle for our current purpose is the web.
     // It could also be 'node', or 'elektron' for desktop apps
     target: 'web',
+    stats: 'errors-warnings',
 
     // This informs Webpack, where it should create the DEV bundle.
     // Webpack in the current code does not actually create the physical files,
@@ -63,7 +62,7 @@ export default {
             noInfo: false,
         }),
         new Dotenv({
-            path: `./.env.${process.env.NODE_ENV === 'production' ? 'prod' : 'dev'}`,
+            path: `./config/.env.${process.env.NODE_ENV === 'production' ? 'prod' : 'dev'}`,
         }),
     ],
 

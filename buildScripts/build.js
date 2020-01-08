@@ -2,9 +2,11 @@
 import webpack from 'webpack';
 import chalk from 'chalk';
 import webpackConfig from '../webpack.config.prod';
-import envVars from '../config'; // for environment variables
+import initEnvVars from '../config'; // for environment variables
 
 // process.env.NODE_ENV = 'production';
+
+initEnvVars();
 
 console.log(chalk.blue('Generating minified bundle for production. This will take a moment...'));
 
@@ -34,5 +36,3 @@ webpack(webpackConfig).run((error, stats) => {
 
     return 0;
 });
-
-console.log(envVars);
