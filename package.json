@@ -5,7 +5,6 @@
     "scripts": {
         "startMessage": "babel-node buildScripts/startMessage.js",
         "prestart:dev": "npm-run-all --parallel startMessage",
-        "config": "babel-node config/index.js",
         "open:src": "nodemon --exec babel-node --extensions .ts,.js buildScripts/srcServer.js",
         "start:dev": "npm-run-all --parallel lint:watch type-check:watch test:watch start-mockapi open:src",
         "start": "npm run start:dev -s",
@@ -22,7 +21,7 @@
         "share": "npm-run-all --parallel open:src localtunnel",
         "update-dependancy-versions": "ncu -u || npx npm-check-updates -u",
         "clean-dist": "rimraf ./dist && mkdir dist",
-        "prebuild": "npm-run-all clean-dist type-check lint test config",
+        "prebuild": "npm-run-all clean-dist type-check lint test",
         "build": "cross-env NODE_ENV=production babel-node buildScripts/build.js",
         "postbuild": "babel-node buildScripts/distServer.js"
     },

@@ -16,6 +16,28 @@ app.get('/', (req, res) => {
     res.sendFile(join(__dirname, '../dist/index.html'));
 });
 
+app.get('/users', (req, res) => {
+    res.json([{
+        id: 81413519,
+        firstName: 'Tina',
+        lastName: 'Renner',
+        email: 'Nathaniel_Rippin@yahoo.com',
+    },
+    {
+        id: 44568811,
+        firstName: 'Glen',
+        lastName: 'Hilpert',
+        email: 'Gracie_Sauer13@gmail.com',
+    },
+    {
+        id: 31923398,
+        firstName: 'Dejon',
+        lastName: 'Halvorson',
+        email: 'Nickolas.Koepp@hotmail.com',
+    },
+    ]);
+});
+
 app.listen(PORT, (err) => {
     if (err) throw err;
 

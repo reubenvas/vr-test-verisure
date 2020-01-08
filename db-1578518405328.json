@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": 40315606,
+      "firstName": "Ewald",
+      "lastName": "Howell",
+      "email": "Shawn33@gmail.com"
+    },
+    {
+      "id": 30643650,
+      "firstName": "Lura",
+      "lastName": "Hayes",
+      "email": "Dameon.Purdy47@gmail.com"
+    },
+    {
+      "id": 26440532,
+      "firstName": "Icie",
+      "lastName": "Connelly",
+      "email": "Lelia.Hilpert@yahoo.com"
+    },
+    {
+      "id": 24958731,
+      "firstName": "Brian",
+      "lastName": "Tromp",
+      "email": "Eve.Konopelski@gmail.com"
+    }
+  ]
+}
