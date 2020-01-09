@@ -25,11 +25,10 @@ export default (): envVars => { // name: initEnvVars
             throw result.error;
         }
     }
-    const { parsed: envs } = result;
     return {
-        endpoint: envs.API_URL,
-        masterKey: envs.API_KEY,
-        port: envs.PORT,
-        greeting: envs.TEST_GREETING,
+        endpoint: process.env.API_URL,
+        masterKey: process.env.API_KEY,
+        port: process.env.PORT,
+        greeting: process.env.TEST_GREETING,
     };
 };
