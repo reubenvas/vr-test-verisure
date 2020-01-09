@@ -1,0 +1,6 @@
+{
+    "name": "Node sample dev environment",
+    "description": "Starter pack dev environment. Has lots of everything you need",
+    "repository": "https://github.com/reubenvas/pluralsight-dev-env.git",
+    "keywords": ["node", "webpack", "babel", "express"]
+}

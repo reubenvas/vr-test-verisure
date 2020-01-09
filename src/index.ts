@@ -3,6 +3,10 @@ import './index.css';
 import generateCourseValue from './courseValue';
 import { /* deleteUser, */ getUsers } from './api/userApi';
 
+// https://sentry.io/onboarding/reubenvas/get-started/
+// Set up Sentry later, error logging in production
+
+
 // debugger; For souremaps to find
 const courseValue = generateCourseValue(1000);
 // eslint-disable-next-line no-console

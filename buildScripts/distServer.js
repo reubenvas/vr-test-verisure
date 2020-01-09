@@ -41,7 +41,7 @@ app.get('/users', (req, res) => {
 app.listen(PORT, (err) => {
     if (err) throw err;
 
-    console.log('Running on port:', PORT); // eslint-disable-line no-console
+    console.log('Node app is running on port:', PORT); // eslint-disable-line no-console
 
     open(`http://localhost:${PORT}`);
 });

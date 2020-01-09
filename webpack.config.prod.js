@@ -5,6 +5,7 @@ import webpack from 'webpack';
 import TerserPlugin from 'terser-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 
 // Webpack is configured by 'export'ing an object
@@ -44,7 +45,7 @@ export default {
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
-        filename: '[name].js', // [name] is a placeholder - webpack will use what's defined in the entry point
+        filename: '[name].[contenthash].js', // [name] is a placeholder - webpack will use what's defined in the entry point
     },
     resolve: {
         extensions: [
@@ -54,6 +55,10 @@ export default {
 
     // define any plug-ins, if they are to be used - hot-reloading, linting, caching, styles, etc.
     plugins: [
+        // Generate an external css fil with a hash in the filename
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].css',
+        }),
         // Use CommonChunkPlugin to create a separate bundle
         // of vendor libraries os that they're cached separetly.
         // new webpack.SplitChunksPlugin({
@@ -75,6 +80,7 @@ export default {
                 minifyURLs: true,
             },
             inject: true,
+            trackJSToken: 'input-track-js-token-here',
         }),
         new webpack.LoaderOptionsPlugin({
             debug: true,
@@ -150,10 +156,14 @@ export default {
             // the -loader suffix is not allowed to be omitted
             loaders: ['babel-loader'],
         },
-        {
+        /*   {
             // also, it is handling the .CSS files for us.
             test: /\.css$/,
             loader: ['style-loader', 'css-loader'],
+        }, */
+        {
+            test: /\.css$/i,
+            use: [MiniCssExtractPlugin.loader, 'css-loader'],
         },
         {
             test: /\.tsx?$/,
