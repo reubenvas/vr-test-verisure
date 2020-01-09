@@ -28,7 +28,7 @@
         "build-client": "cross-env NODE_ENV=production babel-node --extensions .ts,.js buildScripts/build.js",
         "build-server": "babel --out-dir ./server/dist ./server/src",
         "build": "cross-env NODE_ENV=production npm-run-all --parallel build-client build-server",
-        "start:prod": "node server/dist/distServer.js",
+        "start:prod": "node server/dist/server.js",
         "heroku-setEnvVariables": "heroku config:set $(cat config/.env.prod | sed '/^$/d; /#[[:print:]]*$/d')"
     },
     "author": "Reuben Vas",
