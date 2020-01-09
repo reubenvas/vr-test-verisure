@@ -14,7 +14,7 @@ export default (): envVars => { // name: initEnvVars
     const result = dotenv.config({
         path: `./config/.env.${isDevelopment ? 'dev' : 'prod'}`,
     });
-    if (result.error || !process.env.TEST_GREETING) {
+    if (result.error && !process.env.TEST_GREETING) {
         console.error('MISSING A .env FILE. SEE ERRROR MESSAGE BELOW'); // eslint-disable-line no-console
         console.trace(); // eslint-disable-line no-console
         throw result.error;
