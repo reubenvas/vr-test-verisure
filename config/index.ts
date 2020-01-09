@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import { exec } from 'child_process';
 
 type envVars = {
     endpoint: string;

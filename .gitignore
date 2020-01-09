@@ -1,5 +1,5 @@
 node_modules
-dist/*
+**/dist/*
 src/api/db.json
 .env.*
 !.env.example
