@@ -2,6 +2,9 @@ import express from 'express';
 import { join } from 'path';
 import open from 'open';
 import compression from 'compression';
+import initEnvVars from '../config';
+
+if (!process.env.TEST_GREETING) initEnvVars();
 
 const PORT = process.env.PORT || 3000;
 const app = express();

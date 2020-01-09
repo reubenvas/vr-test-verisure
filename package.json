@@ -23,7 +23,7 @@
         "clean-dist": "rimraf ./dist && mkdir dist",
         "prebuild": "npm-run-all clean-dist type-check lint test",
         "build": "cross-env NODE_ENV=production babel-node --extensions .ts,.js buildScripts/build.js",
-        "start:prod": "babel-node buildScripts/distServer.js",
+        "start:prod": "babel-node --extensions .ts,.js buildScripts/distServer.js",
         "heroku-setEnvVariables": "heroku config:set $(cat config/.env.prod | sed '/^$/d; /#[[:print:]]*$/d')"
     },
     "author": "Reuben Vas",

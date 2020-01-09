@@ -16,6 +16,7 @@ export default (): envVars => { // name: initEnvVars
     });
     if (result.error && !process.env.TEST_GREETING) {
         console.error('MISSING A .env FILE. SEE ERRROR MESSAGE BELOW'); // eslint-disable-line no-console
+        console.error("If building for Heroku, run --  heroku config:set $(cat config/.env.prod | sed '/^$/d; /#[[:print:]]*$/d')"); // eslint-disable-line no-console
         console.trace(); // eslint-disable-line no-console
         throw result.error;
     }
