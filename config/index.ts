@@ -15,15 +15,9 @@ export default (): envVars => { // name: initEnvVars
         path: `./config/.env.${isDevelopment ? 'dev' : 'prod'}`,
     });
     if (result.error || !process.env.TEST_GREETING) {
-        try {
-            exec('heroku-setEnvVariables', (err) => {
-                if (err) throw err;
-            });
-        } catch (err) {
-            console.error('MISSING A .env FILE. SEE ERRROR MESSAGE BELOW'); // eslint-disable-line no-console
-            console.trace(); // eslint-disable-line no-console
-            throw result.error;
-        }
+        console.error('MISSING A .env FILE. SEE ERRROR MESSAGE BELOW'); // eslint-disable-line no-console
+        console.trace(); // eslint-disable-line no-console
+        throw result.error;
     }
     return {
         endpoint: process.env.API_URL,
