@@ -3,8 +3,8 @@ import './index.css';
 import generateCourseValue from './courseValue';
 import { /* deleteUser, */ getUsers } from './api/userApi';
 
-// https://sentry.io/onboarding/reubenvas/get-started/
-// Set up Sentry later, error logging in production
+// https://sentry.io/onboarding/reubenvas/get-started/ Set up Sentry later, error logging in production
+// Maybe use Winston instead
 
 
 // debugger; For souremaps to find

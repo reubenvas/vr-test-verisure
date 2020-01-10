@@ -5,6 +5,10 @@
     "scripts": {
         "gg": "babel --out-dir ./server/dist ./server/src",
         "hh": "babel -h",
+        "qq": "babel-node --extensions .ts,.js testar.js",
+        "pregog": "npm-run-all --parallel clean-client-dist clean-server-dist",
+        "gog": "cross-env NODE_ENV=production npm-run-all --parallel build-client build-server",
+
         "startMessage": "babel-node buildScripts/startMessage.js",
         "prestart:dev": "npm-run-all --parallel startMessage",
         "open:src": "nodemon --exec babel-node --extensions .ts,.js server",

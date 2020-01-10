@@ -7,7 +7,6 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-
 // Webpack is configured by 'export'ing an object
 export default {
     // 'debug' was removed in webpack 2.0.0
@@ -104,9 +103,23 @@ export default {
             },
         }),
         // Makes sure the environment variables is available in the window
-        new Dotenv({
-            path: `./config/.env.${process.env.NODE_ENV === 'production' ? 'prod' : 'dev'}`,
-        }),
+        (() => {
+            const definePluginObj = new Dotenv({
+                path: `./config/.env.${process.env.NODE_ENV === 'production' ? 'prod' : 'dev'}`,
+            });
+            if (Object.keys(definePluginObj.definitions).length === 0
+                && process.env.TEST_GREETING) {
+                return new webpack.EnvironmentPlugin({
+                    API_KEY: process.env.API_KEY,
+                    API_URL: process.env.API_URL,
+                    TEST_GREETING: process.env.TEST_GREETING,
+                });
+            }
+            if (Object.keys(definePluginObj.definitions).length === 0) {
+                throw new Error("Couldn't find any .env.* file and didn't find any environment variables.");
+            }
+            return definePluginObj;
+        })(),
     ],
     optimization: {
         minimizer: [
