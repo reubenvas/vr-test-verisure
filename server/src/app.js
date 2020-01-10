@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     res.sendFile(join(__dirname, '../dist/index.html'));
 });
 
-app.get('/users', (req, res) => {
+app.get('/api/users', (req, res) => {
     res.json([{
         id: 81413519, firstName: 'Tina', lastName: 'Renner', email: 'Nathaniel_Rippin@yahoo.com',
     }, {

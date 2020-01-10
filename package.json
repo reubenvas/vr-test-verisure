@@ -7,7 +7,7 @@
         "hh": "babel -h",
         "startMessage": "babel-node buildScripts/startMessage.js",
         "prestart:dev": "npm-run-all --parallel startMessage",
-        "open:src": "nodemon --exec babel-node --extensions .ts,.js buildScripts/srcServer.js",
+        "open:src": "nodemon --exec babel-node --extensions .ts,.js server",
         "start:dev": "npm-run-all --parallel lint:watch type-check:watch test:watch start-mockapi open:src",
         "start": "npm run start:dev -s",
         "lint": "esw . --ext .js --ext .ts webpack.config.* src buildScripts --color",
@@ -28,12 +28,13 @@
         "build-client": "cross-env NODE_ENV=production babel-node --extensions .ts,.js buildScripts/build.js",
         "build-server": "babel --out-dir ./server/dist ./server/src",
         "build": "cross-env NODE_ENV=production npm-run-all --parallel build-client build-server",
-        "start:prod": "node server/dist/server.js",
+        "start:prod": "node server/dist",
         "heroku-setEnvVariables": "heroku config:set $(cat config/.env.prod | sed '/^$/d; /#[[:print:]]*$/d')"
     },
     "author": "Reuben Vas",
     "license": "",
     "dependencies": {
+        "compression": "^1.7.4",
         "express": "^4.17.1",
         "whatwg-fetch": "3.0.0"
     },
@@ -55,7 +56,6 @@
         "chai": "4.2.0",
         "chalk": "3.0.0",
         "cheerio": "0.22.0",
-        "compression": "1.7.4",
         "cross-env": "^6.0.3",
         "css-loader": "3.4.0",
         "dotenv": "^8.2.0",
