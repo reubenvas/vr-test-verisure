@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { JSDOM } from 'jsdom';
 import fs from 'fs';
 

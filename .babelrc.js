@@ -37,9 +37,12 @@
 module.exports = {
     "presets": [
         "@babel/preset-typescript",
-        "@babel/preset-env"
+        "@babel/preset-env",
+        "@babel/react"
     ],
     plugins: [
-        "@babel/plugin-proposal-optional-chaining"
+        "@babel/transform-runtime",
+        "@babel/plugin-proposal-optional-chaining",
+        "@babel/plugin-syntax-dynamic-import"
     ],
 }

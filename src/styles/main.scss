@@ -1,0 +1,9 @@
+// main.scss file contains imports for the partials files.
+// As an example we’ve included three Sass partials files:
+// _variables.scss to declare variables for colors, fonts, etc.;
+// _mixins.scss which includes an example mixin to make a box resizeable;
+// _base.scss which includes the basic styles for the application.
+
+@import 'partials/_base.scss';
+@import 'partials/_mixins.scss';
+@import 'partials/_variables.scss';

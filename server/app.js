@@ -6,7 +6,7 @@ import { join } from 'path';
 import webpack from 'webpack';
 import webpackDevMiddleWare from 'webpack-dev-middleware';
 
-import config from '../webpack.config.dev';
+import config from '../webpack.config.dev.babel';
 import initEnvVars from '../config'; // for environment variables
 
 // in development we have to initialize the local env variables ourselves

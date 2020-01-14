@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import func from './courseValue';
 
 describe('Our first test', () => {

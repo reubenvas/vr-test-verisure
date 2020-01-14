@@ -4,6 +4,8 @@ import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
 
 // Webpack is configured by 'export'ing an object
 export default {
@@ -27,7 +29,7 @@ export default {
         // Not doing a hot-reloading at this point and just keeping it simple to the SRC/Index
         // using __dirname, which is part of node.js, which will give the full path here.
         // also using the 'path' package, which also comes with node.js and has been imported above
-        path.resolve(__dirname, 'src/index.ts'),
+        path.resolve(__dirname, 'src/index.js'),
     ],
 
     // The target of the Webpack bundle for our current purpose is the web.
@@ -64,32 +66,70 @@ export default {
         new Dotenv({
             path: `./config/.env.${process.env.NODE_ENV === 'production' ? 'prod' : 'dev'}`,
         }),
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[name].css',
+        }),
     ],
 
     // This informs Webpack about the file types that we wish to handle
     module: {
         // 'rules' informs Webpack how to handle different file types, it is the new 'loaders'
-        rules: [{
-            // include .js files
-            // we are asking it to handle .JS files
-            test: /\.jsx?$/,
-            // preload the jshint loader
-            enforce: 'pre',
-            // exclude any and all files in the node_modules folder
-            exclude: /node_modules/,
-            // USe the babel loader. With webpack 2.0.0,
-            // the -loader suffix is not allowed to be omitted
-            loaders: ['babel-loader'],
-        },
-        {
-            // also, it is handling the .CSS files for us.
-            test: /\.css$/,
-            loader: ['style-loader', 'css-loader'],
-        },
-        {
-            test: /\.tsx?$/,
-            loader: ['ts-loader'],
-        },
+        rules: [
+            // {
+            //     // include .js files
+            //     // we are asking it to handle .JS files
+            //     test: /\.js$/,
+            //     // preload the jshint loader
+            //     enforce: 'pre',
+            //     // exclude any and all files in the node_modules folder
+            //     exclude: /node_modules/,
+            //     // USe the babel loader. With webpack 2.0.0,
+            //     // the -loader suffix is not allowed to be omitted
+            //     loaders: ['babel-loader'],
+            // },
+            {
+                test: /\.jsx?$/,
+                use: {
+                    loader: 'babel-loader',
+                    options: { presets: ['@babel/preset-react', '@babel/preset-env'] },
+                    // exclude: /node_modules/,
+                },
+            },
+            {
+                test: /\.s?(c|a)ss$/,
+                // exclude: /node_modules/,
+                loaders: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            // modules: true,
+                            sourceMap: true,
+                            importLoaders: 1,
+                            modules: {
+                                localIdentName: '[path][name]__[local]___[hash:base64:5]',
+                            },
+                        },
+                    },
+                    'sass-loader',
+                ],
+            },
+            // {
+            //     // also, it is handling the .CSS files for us.
+            //     test: /\.css$/,
+            //     loader: [MiniCssExtractPlugin.loader, 'css-loader'],
+            // },
+            // {
+            //     test: /\.scss/,
+            //     // Note that postcss loader must come before sass-loader
+            //     use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader',
+            //     'postcss-loader', 'sass-loader'],
+            // },
+            {
+                test: /\.tsx?$/,
+                loader: ['ts-loader'],
+            },
         ],
     },
 };

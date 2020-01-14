@@ -30,7 +30,7 @@ export default {
         // using __dirname, which is part of node.js, which will give the full path here.
         // also using the 'path' package, which also comes with node.js and has been imported above
         // some_file_name: path.resolve(__dirname, 'src/vendor'),
-        main: path.resolve(__dirname, 'src/index.ts'),
+        main: path.resolve(__dirname, 'src/index.js'),
     },
 
     // The target of the Webpack bundle for our current purpose is the web.
@@ -54,9 +54,10 @@ export default {
 
     // define any plug-ins, if they are to be used - hot-reloading, linting, caching, styles, etc.
     plugins: [
-        // Generate an external css fil with a hash in the filename
+        // Generate an external css file with a hash in the filename
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',
+            chunkFilename: '[id].[contenthash].css',
         }),
         // Use CommonChunkPlugin to create a separate bundle
         // of vendor libraries os that they're cached separetly.
@@ -160,7 +161,7 @@ export default {
         rules: [{
             // include .js files
             // we are asking it to handle .JS files
-            test: /\.jsx?$/,
+            test: /\.js$/,
             // preload the jshint loader
             enforce: 'pre',
             // exclude any and all files in the node_modules folder
@@ -169,15 +170,42 @@ export default {
             // the -loader suffix is not allowed to be omitted
             loaders: ['babel-loader'],
         },
-        /*   {
-            // also, it is handling the .CSS files for us.
-            test: /\.css$/,
-            loader: ['style-loader', 'css-loader'],
-        }, */
         {
-            test: /\.css$/i,
-            use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            test: /\.jsx$/,
+            use: {
+                loader: 'babel-loader',
+                options: { presets: ['@babel/preset-react', '@babel/preset-env'] },
+            },
         },
+        {
+            test: /\.s?(c|a)ss$/,
+            exclude: /node_modules/,
+            loaders: [
+                MiniCssExtractPlugin.loader,
+                {
+                    loader: 'css-loader',
+                    options: {
+                        // modules: true,
+                        sourceMap: true,
+                        importLoaders: 1,
+                        modules: {
+                            localIdentName: '[local]___[hash:base64:5]',
+                        },
+                    },
+                },
+                'sass-loader',
+            ],
+        },
+        // {
+        //     test: /\.css$/i,
+        //     use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        // },
+        // {
+        //     test: /\.scss/,
+        //     // Note that postcss loader must come before sass-loader
+        //     use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader',
+        //     'postcss-loader', 'sass-loader'],
+        // },
         {
             test: /\.tsx?$/,
             loader: ['ts-loader'],
