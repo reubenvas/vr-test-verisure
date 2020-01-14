@@ -58,3 +58,26 @@ heroku config:set $(cat config/.env.prod | sed '/^$/d; /#[[:print:]]*$/d')
 ```
 
 #### See more info on <https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app>
+
+## Bash scripts
+
+Add bash scripts in the folder `scripts` and link to it in Npmscripts (in scripts in `package.json`) like so:
+
+```json
+"scripts": {
+   "build": "./build.sh"
+},
+````
+
+Also, make sure you put a hash bang at the top of your bash file `#!/usr/bin/env bash`.
+Additionally, make sure you have permissions to execute the file. Run:
+
+```bash
+chmod +x ./build.sh
+```
+
+Finally, to execute the newly created bash script, run:
+
+```bash
+npm run build
+```
