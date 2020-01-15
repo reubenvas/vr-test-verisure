@@ -1,29 +1,50 @@
-// app.js and server.js are together the same file as buildScripts/distServer.js
-
 import express from 'express';
 import { join } from 'path';
 import compression from 'compression';
 
-const app = express();
+const app/* : express.Application */ = express();
+let directory = '';
 
-// This is NOT for actual production use.
-// Just useful for hosting the minified
-// production build for local debugging prusposes.
-app.use(compression());
-app.use(express.static('dist'));
+console.log('This is the NODE_ENV:', process.env.NODE_ENV);
+
+if (process.env.NODE_ENV === 'development') {
+    console.log('from dev in app');
+    import('./helpers/developmentAddOns').then((devAddOns) => devAddOns.default(app));
+    directory = 'src';
+}
+if (process.env.NODE_ENV === 'production') {
+    // This is NOT for actual production use.
+    // Just useful for hosting the minified
+    // production build for local debugging prusposes.
+    app.use(compression());
+    app.use(express.static('dist'));
+    directory = 'dist';
+}
 
 app.get('/', (req, res) => {
-    res.sendFile(join(__dirname, '../dist/index.html'));
+    res.sendFile(join(__dirname, `../../${directory}/index.html`));
 });
 
 app.get('/api/users', (req, res) => {
     res.json([{
-        id: 81413519, firstName: 'Tina', lastName: 'Renner', email: 'Nathaniel_Rippin@yahoo.com',
-    }, {
-        id: 44568811, firstName: 'Glen', lastName: 'Hilpert', email: 'Gracie_Sauer13@gmail.com',
-    }, {
-        id: 31923398, firstName: 'Dejon', lastName: 'Halvorson', email: 'Nickolas.Koepp@hotmail.com',
-    }]);
+        id: 81413519,
+        firstName: 'Tina',
+        lastName: 'Renner',
+        email: 'Nathaniel_Rippin@yahoo.com',
+    },
+    {
+        id: 44568811,
+        firstName: 'Glen',
+        lastName: 'Hilpert',
+        email: 'Gracie_Sauer13@gmail.com',
+    },
+    {
+        id: 31923398,
+        firstName: 'Dejon',
+        lastName: 'Halvorson',
+        email: 'Nickolas.Koepp@hotmail.com',
+    },
+    ]);
 });
 
 // tools to expose the local app publically, SHARINGWORK-IN-PROGRESS

@@ -1,10 +1,10 @@
 import dotenv from 'dotenv';
 
 type envVars = {
-    endpoint: string;
-    masterKey: string;
-    port: string;
-    greeting: string;
+    endpoint?: string;
+    masterKey?: string;
+    port?: string;
+    greeting?: string;
 }
 
 export default (): envVars => { // name: initEnvVars

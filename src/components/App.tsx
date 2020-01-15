@@ -1,12 +1,11 @@
 import React from 'react';
-// eslint-disable-next-line no-unused-vars
 import styles from '../styles/main.scss';
 import DarkButton from './DarkButton/DarkButton';
 import LightButton from './LightButton/LightButton';
 import UsersTable from './UsersTable/UsersTable';
 
 
-const App = () => (
+const App = (): React.ReactElement => (
     <div className="hello-world">
         <h1>Hello World</h1>
         <p>Hello you!</p>

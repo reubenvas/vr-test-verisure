@@ -2,12 +2,23 @@ import React, { useEffect, useState } from 'react';
 import UserTableRow from '../UserTableRow/UserTableRow';
 import { getUsers } from '../../api/userApi';
 
-const UsersTable = () => {
-    const [users, setUsers] = useState([]);
+type users = {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+}[] | null;
 
-    const fetchUsers = async () => {
-        const response = await getUsers();
-        setUsers(response);
+const UsersTable = (): React.ReactElement => {
+    const [users, setUsers] = useState<users>([]);
+
+    const fetchUsers = async (): Promise<void> => {
+        try {
+            const response = await getUsers();
+            setUsers(response);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     useEffect(() => {
@@ -26,7 +37,7 @@ const UsersTable = () => {
                 </tr>
             </thead>
             <tbody id="users">
-                {users.map((user) => (
+                {users && users.map((user) => (
                     <UserTableRow
                         key={user.id}
                         id={user.id}
