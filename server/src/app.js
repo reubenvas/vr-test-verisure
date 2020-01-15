@@ -2,6 +2,8 @@ import express from 'express';
 import { join } from 'path';
 import compression from 'compression';
 
+import devAddOns from './helpers/developmentAddOns';
+
 const app/* : express.Application */ = express();
 let directory = '';
 
@@ -9,7 +11,10 @@ console.log('This is the NODE_ENV:', process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === 'development') {
     console.log('from dev in app');
-    import('./helpers/developmentAddOns').then((devAddOns) => devAddOns.default(app));
+    devAddOns(app);
+    // The problem which causes it to not work is this dynamic import. Don't know why though
+    // In production an error will occur when importing developmentAddOns statically
+    // import('./helpers/developmentAddOns').then((devAddOns) => devAddOns.default(app)).catch(err => console.error(err));
     directory = 'src';
 }
 if (process.env.NODE_ENV === 'production') {
