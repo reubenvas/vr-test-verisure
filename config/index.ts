@@ -7,7 +7,7 @@ type envVars = {
     greeting?: string;
 }
 
-export default (): envVars => { // name: initEnvVars
+const initEnvVars = (): envVars => { // name: initEnvVars
     const isDevelopment = process.env.NODE_ENV !== 'production';
 
     const result = dotenv.config({
@@ -26,3 +26,6 @@ export default (): envVars => { // name: initEnvVars
         greeting: process.env.TEST_GREETING,
     };
 };
+
+export default initEnvVars;
+module.exports = initEnvVars;

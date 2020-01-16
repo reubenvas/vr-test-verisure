@@ -8,7 +8,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 
 // Webpack is configured by 'export'ing an object
-export default {
+const config = {
     // 'debug' was removed in webpack 2.0.0
     // debug: true,
     // 'devtool' has been set to inline-source-map, source-map ones are for higher quality
@@ -133,3 +133,6 @@ export default {
         ],
     },
 };
+
+export default config;
+module.exports = config;
