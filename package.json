@@ -4,7 +4,7 @@
     "description": "JavaScript development environment Pluralsight course by Cory House",
     "scripts": {
         "bab": "nodemon --help",
-        "lint": "esw . --ext .js,.jsx,.ts,.tsx  --color",
+        "lint": "esw . --ext .js,.ts,.tsx  --color",
         "lint:watch": "npm run lint -- --watch",
         "type-check": "tsc --noEmit",
         "type-check:watch": "npm run type-check -- --watch",
