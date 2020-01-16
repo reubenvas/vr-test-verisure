@@ -9,6 +9,10 @@ let directory = '';
 
 console.log('This is the NODE_ENV:', process.env.NODE_ENV);
 
+if (!['development', 'production'].includes(process.env.NODE_ENV)) {
+    throw new Error('NODE_ENV Vars not set, process.env.NODE_ENV has not been set to either "production" or "development". It has to be either "production" or "development".');
+}
+
 if (process.env.NODE_ENV === 'development') {
     console.log('from dev in app');
     devAddOns(app);
@@ -17,8 +21,7 @@ if (process.env.NODE_ENV === 'development') {
     // import('./helpers/developmentAddOns')
     // .then((devAddOns) => devAddOns.default(app)).catch(err => console.error(err));
     directory = 'src';
-}
-if (process.env.NODE_ENV === 'production') {
+} else {
     // This is NOT for actual production use.
     // Just useful for hosting the minified
     // production build for local debugging prusposes.
