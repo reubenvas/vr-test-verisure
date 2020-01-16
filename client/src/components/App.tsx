@@ -1,5 +1,6 @@
 import React from 'react';
-import styles from '../styles/main.scss';
+import styles from '../styles/main.scss'; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 import DarkButton from './DarkButton/DarkButton';
 import LightButton from './LightButton/LightButton';
 import UsersTable from './UsersTable/UsersTable';

@@ -1,7 +1,6 @@
 import express from 'express';
 import { join } from 'path';
 import compression from 'compression';
-import chalk from 'chalk';
 
 import devAddOns from './helpers/developmentAddOns';
 import initEnvVars from '../../config/index';

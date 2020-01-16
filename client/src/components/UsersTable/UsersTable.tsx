@@ -17,7 +17,7 @@ const UsersTable = (): React.ReactElement => {
             const response = await getUsers();
             setUsers(response);
         } catch (err) {
-            console.log(err);
+            console.log(err); // eslint-disable-line no-console
         }
     };
 
