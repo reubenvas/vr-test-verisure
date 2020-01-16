@@ -1,17 +1,14 @@
 import express from 'express';
 import { join } from 'path';
 import compression from 'compression';
+import chalk from 'chalk';
 
 import devAddOns from './helpers/developmentAddOns';
+import initEnvVars from '../../config/index';
 
 const app/* : express.Application */ = express();
 let directory = '';
 
-console.log('This is the NODE_ENV:', process.env.NODE_ENV);
-
-if (!['development', 'production'].includes(process.env.NODE_ENV)) {
-    throw new Error('NODE_ENV Vars not set, process.env.NODE_ENV has not been set to either "production" or "development". It has to be either "production" or "development".');
-}
 
 if (process.env.NODE_ENV === 'development') {
     console.log('from dev in app');
@@ -26,12 +23,20 @@ if (process.env.NODE_ENV === 'development') {
     // Just useful for hosting the minified
     // production build for local debugging prusposes.
     app.use(compression());
-    app.use(express.static('dist'));
+    app.use(express.static('client/dist'));
     directory = 'dist';
 }
 
+if (!process.env.TEST_GREETING) {
+    process.env.NODE_ENV = 'production';
+    initEnvVars();
+}
+
+console.log('This is the NODE_ENV:', process.env.NODE_ENV);
+
+
 app.get('/', (req, res) => {
-    res.sendFile(join(__dirname, `../../${directory}/index.html`));
+    res.sendFile(join(__dirname, `../../client/${directory}/index.html`));
 });
 
 app.get('/api/users', (req, res) => {

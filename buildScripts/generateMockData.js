@@ -18,7 +18,7 @@ jsf.extend('faker', () => faker);
 
 const json = JSON.stringify(jsf(schema));
 
-fs.writeFile('./src/api/db.json', json, (err) => {
+fs.writeFile('./client/src/api/db.json', json, (err) => {
     if (err) {
         console.log(chalk.red(err));
         return;

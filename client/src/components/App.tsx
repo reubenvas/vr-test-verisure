@@ -9,6 +9,7 @@ const App = (): React.ReactElement => (
     <div className="hello-world">
         <h1>Hello World</h1>
         <p>Hello you!</p>
+        <p>Hello you!</p>
         <p>Reuuuuuuben</p>
         <LightButton label='Light mode'/>
         <DarkButton label='Dark mode'/>

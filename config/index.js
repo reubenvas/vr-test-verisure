@@ -1,13 +1,14 @@
-import dotenv from 'dotenv';
-
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const dotenv = require('dotenv');
+/*
 type envVars = {
     endpoint?: string;
     masterKey?: string;
     port?: string;
     greeting?: string;
-}
+} */
 
-const initEnvVars = (): envVars => { // name: initEnvVars
+const initEnvVars = ()/* : envVars */ => { // name: initEnvVars
     const isDevelopment = process.env.NODE_ENV !== 'production';
 
     const result = dotenv.config({
@@ -27,5 +28,5 @@ const initEnvVars = (): envVars => { // name: initEnvVars
     };
 };
 
-export default initEnvVars;
+/* export default initEnvVars; */
 module.exports = initEnvVars;

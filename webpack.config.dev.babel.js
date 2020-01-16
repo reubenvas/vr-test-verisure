@@ -29,7 +29,7 @@ const config = {
         // Not doing a hot-reloading at this point and just keeping it simple to the SRC/Index
         // using __dirname, which is part of node.js, which will give the full path here.
         // also using the 'path' package, which also comes with node.js and has been imported above
-        path.resolve(__dirname, 'src/index.js'),
+        path.resolve(__dirname, 'client/src/index.js'),
     ],
 
     // The target of the Webpack bundle for our current purpose is the web.
@@ -56,7 +56,7 @@ const config = {
     plugins: [
         // Create HTML file that includes reference to bundled JS.
         new HtmlWebpackPlugin({
-            template: 'src/index.html',
+            template: 'client/src/index.html',
             inject: true,
         }),
         new webpack.LoaderOptionsPlugin({

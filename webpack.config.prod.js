@@ -30,7 +30,7 @@ export default {
         // using __dirname, which is part of node.js, which will give the full path here.
         // also using the 'path' package, which also comes with node.js and has been imported above
         // some_file_name: path.resolve(__dirname, 'src/vendor'),
-        main: path.resolve(__dirname, 'src/index.js'),
+        main: path.resolve(__dirname, 'client/src/index.js'),
     },
 
     // The target of the Webpack bundle for our current purpose is the web.
@@ -42,7 +42,7 @@ export default {
     // but will serve the build from memory.
     // But while definig the output, the path and file names are specified to Webpack
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'client/dist'),
         publicPath: '/',
         filename: '[name].[contenthash].js', // [name] is a placeholder - webpack will use what's defined in the entry point
     },
@@ -66,7 +66,7 @@ export default {
         // }),
         // Create HTML file that includes reference to bundled JS.
         new HtmlWebpackPlugin({
-            template: 'src/index.html',
+            template: 'client/src/index.html',
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,

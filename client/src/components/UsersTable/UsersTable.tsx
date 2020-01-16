@@ -25,6 +25,8 @@ const UsersTable = (): React.ReactElement => {
         fetchUsers();
     }, []);
 
+    console.log(process.env.TEST_GREETING);
+
     return (
         <table>
             <thead>

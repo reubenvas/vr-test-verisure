@@ -4,7 +4,7 @@ import fs from 'fs';
 
 describe('index.html', () => {
     test('should say "Tjenare"', () => {
-        const index = fs.readFileSync('./src/index.html', 'utf8');
+        const index = fs.readFileSync('./client/src/index.html', 'utf8');
         const dom = new JSDOM(index);
         const h1 = dom.window.document.querySelector('h1');
         if (h1 === null) {
