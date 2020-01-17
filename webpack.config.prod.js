@@ -149,6 +149,24 @@ export default {
                     chunks: 'all',
                     // import file path containing node_modules
                     test: /[\\/]node_modules[\\/]/,
+                    // priority
+                    priority: 20,
+                },
+
+                // common chunk
+                common: {
+                    name: 'common',
+                    // any imported modules which don’t fall inside vendor chunk will be a part of
+                    // common chunk if they are shared between at least 2 chunks (sync or async
+                    // because of all value of chunks). minChunks tells SplitChunksPlugin to only
+                    // inject module inside common chunk if and only if they are shared between at
+                    // least 2 chunks (sync or async because of all value of chunks).
+                    // https://itnext.io/react-router-and-webpack-v4-code-splitting-using-splitchunksplugin-f0a48f110312
+                    minChunks: 2,
+                    chunks: 'all',
+                    priority: 10,
+                    reuseExistingChunk: true,
+                    // enforce: true,
                 },
             },
         },
