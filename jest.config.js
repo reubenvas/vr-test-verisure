@@ -1,7 +1,13 @@
 module.exports = {
     transform: {
         '^.+\\.tsx?$': 'babel-jest',
+        '^.+\\.jsx?$': 'babel-jest',
     },
+    moduleFileExtensions: [
+        'ts',
+        'tsx',
+        'js',
+    ],
 };
 
 // Register Babel to transpile before our tests run

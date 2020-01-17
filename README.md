@@ -2,6 +2,46 @@
 
 README will be updated every now and then and is in progress...
 
+## Git
+
+### Download project
+
+Run in bash:
+
+```bash
+git clone [git-web-repo-url]
+```
+
+### Create branch (and switch to that branch)
+
+Run in bash:
+
+```bash
+git checkout -b [new-branch-name]
+```
+
+### Delete branch (locally and remotely)
+
+**Locally** - Run in bash:
+
+```bash
+git branch [-d or -D] [name-of-branch]
+```
+
+**Remotely** - Run in bash:
+
+```bash
+git push origin --delete [name-of-branch]
+```
+
+### View all branches
+
+Run in bash:
+
+```bash
+git branch -a
+```
+
 ## Heroku
 
 ### Initial creation of app
