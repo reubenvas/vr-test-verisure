@@ -11,10 +11,9 @@ type envVars = {
 const initEnvVars = ()/* : envVars */ => { // name: initEnvVars
     // eslint-disable-next-line global-require
     const dotenv = require('dotenv');
-    const isDevelopment = process.env.NODE_ENV !== 'production';
-
+    const isProduction = process.env.NODE_ENV === 'production';
     const result = dotenv.config({
-        path: `./config/.env.${isDevelopment ? 'dev' : 'prod'}`,
+        path: `./config/.env.${isProduction ? 'prod' : 'dev'}`,
     });
     if (result.error && !process.env.TEST_GREETING) {
         console.error('MISSING A .env FILE. SEE ERRROR MESSAGE BELOW'); // eslint-disable-line no-console
