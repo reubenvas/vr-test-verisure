@@ -2,6 +2,8 @@
 
 README will be updated every now and then and is in progress...
 
+Check this out if this repo will be used as a starterkit/template for other repos... <https://stackoverflow.com/questions/9257533/what-is-the-difference-between-origin-and-upstream-on-github/9257901#9257901> Add this repo in the new repo as remote upstream, then get new changes from here with `git fetch`
+
 ## Git
 
 ### Download project
