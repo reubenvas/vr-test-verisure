@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 /*
 type envVars = {
     endpoint?: string;
@@ -9,6 +9,8 @@ type envVars = {
 } */
 
 const initEnvVars = ()/* : envVars */ => { // name: initEnvVars
+    // eslint-disable-next-line global-require
+    const dotenv = require('dotenv');
     const isDevelopment = process.env.NODE_ENV !== 'production';
 
     const result = dotenv.config({
