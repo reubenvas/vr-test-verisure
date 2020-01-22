@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styles from './styles.scss'; // eslint-disable-line @typescript-eslint/no-unused-vars
 import UserTableRow from '../UserTableRow/UserTableRow';
 import { getUsers } from '../../api/userApi';
 

@@ -97,7 +97,7 @@ const config = {
                 },
             },
             {
-                test: /\.s?(c|a)ss$/,
+                test: /\.(s(c|a)ss|css)$/,
                 // exclude: /node_modules/,
                 loaders: [
                     MiniCssExtractPlugin.loader,

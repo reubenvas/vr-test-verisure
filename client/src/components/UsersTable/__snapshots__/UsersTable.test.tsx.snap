@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DarkButton component snapshot renders 1`] = `
+<table>
+  <thead>
+    <tr>
+      <th>
+         
+      </th>
+      <th>
+        Id
+      </th>
+      <th>
+        First Name
+      </th>
+      <th>
+        Last Name
+      </th>
+      <th>
+        Email
+      </th>
+    </tr>
+  </thead>
+  <tbody
+    id="users"
+  />
+</table>
+`;

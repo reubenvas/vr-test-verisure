@@ -10,7 +10,7 @@ export default async (app) => {
     const webpack = require('webpack');
     const webpackDevMiddleWare = require('webpack-dev-middleware');
     const config = require('../../../webpack.config.dev.babel');
-    const initEnvVars = require('../../../config').default;
+    const initEnvVars = require('../../../config');
     /*     eslint-enable global-require */
 
     // const webpack = (await import('webpack')).default;

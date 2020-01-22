@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DarkButton component snapshot renders 1`] = `
+<tr>
+  <td>
+    <a
+      className="deleteUser"
+      data-id="1"
+      href="#"
+    >
+      Delete
+    </a>
+  </td>
+  <td>
+    1
+  </td>
+  <td>
+    Olle
+  </td>
+  <td>
+    Svensson
+  </td>
+  <td>
+    ollesvensson@gmail.com
+  </td>
+</tr>
+`;
