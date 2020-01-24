@@ -26,6 +26,7 @@ const config = {
 
     // This is the entry point of the Webpack
     entry: [
+        'webpack-hot-middleware/client?reload=true',
         // Not doing a hot-reloading at this point and just keeping it simple to the SRC/Index
         // using __dirname, which is part of node.js, which will give the full path here.
         // also using the 'path' package, which also comes with node.js and has been imported above
@@ -70,24 +71,14 @@ const config = {
             filename: '[name].css',
             chunkFilename: '[name].css',
         }),
+        // For hot reload
+        new webpack.HotModuleReplacementPlugin(),
     ],
 
     // This informs Webpack about the file types that we wish to handle
     module: {
         // 'rules' informs Webpack how to handle different file types, it is the new 'loaders'
         rules: [
-            // {
-            //     // include .js files
-            //     // we are asking it to handle .JS files
-            //     test: /\.js$/,
-            //     // preload the jshint loader
-            //     enforce: 'pre',
-            //     // exclude any and all files in the node_modules folder
-            //     exclude: /node_modules/,
-            //     // USe the babel loader. With webpack 2.0.0,
-            //     // the -loader suffix is not allowed to be omitted
-            //     loaders: ['babel-loader'],
-            // },
             {
                 test: /\.jsx?$/,
                 use: {
@@ -115,17 +106,6 @@ const config = {
                     'sass-loader',
                 ],
             },
-            // {
-            //     // also, it is handling the .CSS files for us.
-            //     test: /\.css$/,
-            //     loader: [MiniCssExtractPlugin.loader, 'css-loader'],
-            // },
-            // {
-            //     test: /\.scss/,
-            //     // Note that postcss loader must come before sass-loader
-            //     use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader',
-            //     'postcss-loader', 'sass-loader'],
-            // },
             {
                 test: /\.tsx?$/,
                 loader: ['ts-loader'],

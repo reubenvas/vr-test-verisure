@@ -8,6 +8,8 @@ import initEnvVars from '../../config/index';
 const app/* : express.Application */ = express();
 let directory = '';
 
+// Optimize for production: https://expressjs.com/en/advanced/best-practice-performance.html
+
 
 if (process.env.NODE_ENV === 'development') {
     console.log('from dev in app');

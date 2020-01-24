@@ -8,7 +8,8 @@
 export default async (app) => {
     /*     eslint-disable global-require */
     const webpack = require('webpack');
-    const webpackDevMiddleWare = require('webpack-dev-middleware');
+    const webpackDevMiddleware = require('webpack-dev-middleware');
+    const webpackHotMiddleware = require('webpack-hot-middleware');
     const config = require('../../../webpack.config.dev.babel');
     const initEnvVars = require('../../../config');
     /*     eslint-enable global-require */
@@ -22,8 +23,10 @@ export default async (app) => {
     initEnvVars();
 
     const compiler = webpack(config);
+    const hotMiddleware = webpackHotMiddleware(compiler);
 
-    app.use(webpackDevMiddleWare(compiler, {
+    app.use(webpackDevMiddleware(compiler, {
         publicPath: config.output.publicPath,
     }));
+    app.use(hotMiddleware);
 };

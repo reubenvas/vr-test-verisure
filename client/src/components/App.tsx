@@ -7,7 +7,7 @@ import UsersTable from './UsersTable/UsersTable';
 
 
 const App = (): React.ReactElement => (
-    <div className="hello-world">
+    <div className={`hello-world ${styles.app}`} >
         <h1>Hello World</h1>
         <p>Hello you!</p>
         <p>Hello you!</p>

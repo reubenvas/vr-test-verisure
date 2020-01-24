@@ -214,16 +214,6 @@ export default {
                 'sass-loader',
             ],
         },
-        // {
-        //     test: /\.css$/i,
-        //     use: [MiniCssExtractPlugin.loader, 'css-loader'],
-        // },
-        // {
-        //     test: /\.scss/,
-        //     // Note that postcss loader must come before sass-loader
-        //     use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader',
-        //     'postcss-loader', 'sass-loader'],
-        // },
         {
             test: /\.tsx?$/,
             loader: ['ts-loader'],

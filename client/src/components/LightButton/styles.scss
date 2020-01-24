@@ -2,5 +2,6 @@
 @import '../../styles/partials/variables';
 
 .button {
-  background-color: greenyellow;
+  background-color: $paper;
+  color: $charcoal;
 }
