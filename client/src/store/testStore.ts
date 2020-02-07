@@ -7,7 +7,7 @@ import localForage from 'localforage';
 configure({ enforceActions: 'observed' });
 
 class Store {
-    @observable @persist timesClicked = 0
+    timesClicked = 0
 
     increaseTimesClicked = (newNumber: number): void => {
         this.timesClicked = newNumber;
