@@ -1,12 +1,19 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 import styles from './styles.scss';
+
+import testStore from '../../store/testStore';
 
 type propTypes = {
     label: string;
 };
 
-const LightButton = (props: propTypes): React.ReactElement<propTypes> => (
-    <button className={styles.button}>{props.label}</button>
-);
+const LightButton = (props: propTypes): React.ReactElement<propTypes> => {
+    const { timesClicked } = testStore;
+    const { increaseTimesClicked } = testStore;
+    return (
+        <button onClick={() => increaseTimesClicked(timesClicked + 1)} className={styles.button}>{`${props.label} ${timesClicked}`}</button>
+    );
+};
 
-export default LightButton;
+export default observer(LightButton);
