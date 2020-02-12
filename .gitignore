@@ -3,3 +3,4 @@ node_modules
 client/src/api/db.json
 .env.*
 !.env.example
+backstop_data

@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import { getUsers } from './userApi';
+import { getUsers } from './scenarioApi';
 
 describe('User api (from client)', () => {
     const usersMockResponse = [

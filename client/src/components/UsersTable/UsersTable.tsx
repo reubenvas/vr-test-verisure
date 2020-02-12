@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles.scss'; // eslint-disable-line @typescript-eslint/no-unused-vars
 import UserTableRow from '../UserTableRow/UserTableRow';
-import { getUsers } from '../../api/userApi';
+import { getScenarios } from '../../api/scenarioApi';
 
 type users = {
     id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
+    label: string;
+    cookiePath: string;
+    url: string;
+    referenceUrl: string;
+    readyEvent: string;
+    readySelector: string;
+    delay: number;
+    hoverSelector: string;
+    clickSelector: string;
+    postInteractionWait: number;
+    selectorExpansion: boolean;
+    expect: number;
+    misMatchThreshold: number;
+    requireSameDimensions: boolean;
 }[] | null;
 
 const UsersTable = (): React.ReactElement => {
@@ -15,7 +26,7 @@ const UsersTable = (): React.ReactElement => {
 
     const fetchUsers = async (): Promise<void> => {
         try {
-            const response = await getUsers();
+            const response = await getScenarios();
             setUsers(response);
         } catch (err) {
             console.log(err); // eslint-disable-line no-console
@@ -44,9 +55,9 @@ const UsersTable = (): React.ReactElement => {
                     <UserTableRow
                         key={user.id}
                         id={user.id}
-                        firstName={user.firstName}
-                        lastName={user.lastName}
-                        email={user.email}
+                        url={user.url}
+                        referenceUrl={user.referenceUrl}
+                        label={user.label}
                     />
                 ))}
             </tbody>

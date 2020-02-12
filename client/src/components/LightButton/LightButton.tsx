@@ -12,7 +12,7 @@ const LightButton = (props: propTypes): React.ReactElement<propTypes> => {
     const { timesClicked } = testStore;
     const { increaseTimesClicked } = testStore;
     return (
-        <button onClick={() => increaseTimesClicked(timesClicked + 1)} className={styles.button}>{`${props.label} ${timesClicked}`}</button>
+        <button onClick={() => increaseTimesClicked(timesClicked + 1)} className={`${styles.button} button is-large`}>{`${props.label} ${timesClicked}`}</button>
     );
 };
 
