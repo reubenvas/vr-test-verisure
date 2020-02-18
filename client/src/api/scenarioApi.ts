@@ -1,25 +1,24 @@
 import 'whatwg-fetch';
-import getGaseUrl from './baseUrl';
+import { Scenario } from 'backstopjs';
 
-const baseUrl = getGaseUrl();
+const baseUrl = '/api/';
 
-type Scenario = {
-    id: string;
-    label: string;
-    cookiePath: string;
-    url: string;
-    referenceUrl: string;
-    readyEvent: string;
-    readySelector: string;
-    delay: number;
-    hoverSelector: string;
-    clickSelector: string;
-    postInteractionWait: number;
-    selectorExpansion: boolean;
-    expect: number;
-    misMatchThreshold: number;
-    requireSameDimensions: boolean;
-}
+
+export const postScenarios = (scenarios: string): Promise<Scenario[]> | null => {
+    try {
+        return fetch(`${baseUrl}scenarios`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: scenarios, // Scenario[]
+        }).then((r) => r.json());
+    } catch (err) {
+        console.error(err); // eslint-disable-line no-console
+        console.trace(); // eslint-disable-line no-console
+        return null;
+    }
+};
 
 export const getScenarios = (): Promise<Scenario[] | null> => get('scenarios');
 export const deleteScenario = (id: string): Promise<Scenario[] | null> => del(`scenarios/${id}`);

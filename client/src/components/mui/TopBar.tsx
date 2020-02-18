@@ -3,8 +3,9 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import { Grid } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import DialogButton from './DialogButton';
+import FormDialog from './FormDialog';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
@@ -37,7 +38,7 @@ const DenseAppBar = (): React.ReactElement<{}> => {
                             </Typography>
                         </Grid>
                         <Grid item justify='center' container alignItems='center' className={classes.popoutButton}>
-                            <Button variant="contained" className={classes.menuButton} color="secondary">Add scenario</Button>
+                            <DialogButton dialog={FormDialog}>Add scenario</DialogButton>
                         </Grid>
                     </Grid>
                 </Toolbar>

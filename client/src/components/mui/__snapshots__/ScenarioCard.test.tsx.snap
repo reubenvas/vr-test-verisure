@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DarkButton component snapshot renders 1`] = `
+<div
+  className="MuiPaper-root MuiCard-root makeStyles-root-1 MuiPaper-elevation1 MuiPaper-rounded"
+>
+  <div
+    className="MuiCardContent-root makeStyles-noBottomPadding-7"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-container"
+    >
+      <div
+        className="MuiGrid-root makeStyles-textInMiddle-8 MuiGrid-item MuiGrid-grid-xs-6"
+      >
+        <h2
+          className="MuiTypography-root MuiTypography-h6"
+        >
+          Test scenario card
+        </h2>
+        <span
+          className="MuiTypography-root makeStyles-dividerFullWidth-4 MuiTypography-caption MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+        >
+          Scenario label
+        </span>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
+      >
+        <ul
+          className="MuiList-root makeStyles-listRoot-5 MuiList-padding"
+        >
+          <li
+            className="MuiListItem-root makeStyles-noTopPadding-6 makeStyles-noBottomPadding-7 MuiListItem-gutters"
+            disabled={false}
+          >
+            <div
+              className="MuiListItemText-root MuiListItemText-multiline"
+            >
+              <span
+                className="MuiTypography-root MuiListItemText-primary MuiTypography-body1"
+              >
+                https://test.com
+              </span>
+              <p
+                className="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary"
+              >
+                Url
+              </p>
+            </div>
+          </li>
+          <li
+            className="MuiDivider-root"
+            role="separator"
+          />
+          <li
+            className="MuiListItem-root makeStyles-noTopPadding-6 makeStyles-noBottomPadding-7 MuiListItem-gutters"
+            disabled={false}
+          >
+            <div
+              className="MuiListItemText-root MuiListItemText-multiline"
+            >
+              <span
+                className="MuiTypography-root MuiListItemText-primary MuiTypography-body1"
+              >
+                https://test.com
+              </span>
+              <p
+                className="MuiTypography-root MuiListItemText-secondary MuiTypography-body2 MuiTypography-colorTextSecondary"
+              >
+                Reference url
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div
+    className="MuiCardActions-root MuiCardActions-spacing"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-baseline MuiGrid-justify-xs-space-between"
+    >
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-text"
+        disabled={false}
+        onBlur={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          Learn More
+        </span>
+      </button>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          Delete
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;

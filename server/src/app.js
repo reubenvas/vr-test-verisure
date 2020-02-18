@@ -1,11 +1,14 @@
 import express from 'express';
 import { join } from 'path';
 import compression from 'compression';
+import bodyParser from 'body-parser';
 
 import devAddOns from './helpers/developmentAddOns';
 import initEnvVars from '../../config/index';
+import { addScenariosToTest, createReferenceForTest, startTest } from './backstop';
 
 const app/* : express.Application */ = express();
+app.use(bodyParser());
 let directory = '';
 
 // Optimize for production: https://expressjs.com/en/advanced/best-practice-performance.html
@@ -60,6 +63,15 @@ app.get('/api/users', (req, res) => {
         email: 'Nickolas.Koepp@hotmail.com',
     },
     ]);
+});
+
+
+app.post('/api/scenarios', async (req, res) => {
+    const scenarios = req.body;
+    await addScenariosToTest(scenarios);
+    await createReferenceForTest();
+    await startTest();
+    res.send(req.body);
 });
 
 // tools to expose the local app publically, SHARINGWORK-IN-PROGRESS

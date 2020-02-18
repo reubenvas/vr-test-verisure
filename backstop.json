@@ -21,7 +21,6 @@
   "scenarios": [
     {
       "label": "BackstopJS Homepage",
-      "cookiePath": "backstop_data/engine_scripts/cookies.json",
       "url": "https://www.verisure.se/f/pub/startsida.html",
       "referenceUrl": "https://www.verisure.se/f/pub/startsida.html",
       "readyEvent": "",
@@ -30,7 +29,7 @@
       "hideSelectors": [],
       "removeSelectors": [],
       "hoverSelector": "",
-      "clickSelector": "span.red-button.popupbutton",
+      "clickSelector": "",
       "postInteractionWait": 0,
       "selectors": [],
       "selectorExpansion": true,

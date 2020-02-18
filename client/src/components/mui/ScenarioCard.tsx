@@ -1,13 +1,17 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import {
-    Grid, createStyles, List, ListItem, ListItemText, Divider,
-} from '@material-ui/core';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
+import userStore from '../../store/scenarioStore';
+
 
 const useStyles = makeStyles((theme) => createStyles({
     root: {
@@ -43,12 +47,19 @@ const useStyles = makeStyles((theme) => createStyles({
 
 type propTypes = {
     label: string;
-    refUrl: string;
+    refUrl?: string;
     url: string;
+    id: number;
 };
 
-const ScenarioCard = () => {
+const ScenarioCard = ({
+    id, label, refUrl, url,
+}: propTypes): React.ReactElement => {
     const classes = useStyles();
+
+    const deleteScenario = (index: number) => (): void => {
+        userStore.removeScenario(index);
+    };
 
     return (
         <Card className={classes.root}>
@@ -56,7 +67,7 @@ const ScenarioCard = () => {
                 <Grid container >
                     <Grid className={classes.textInMiddle} item xs={6}>
                         <Typography variant="h6" component="h2">
-                            Verisure homepage
+                            {label}
                         </Typography>
                         <Typography
                             className={classes.dividerFullWidth}
@@ -70,18 +81,21 @@ const ScenarioCard = () => {
                     <Grid item xs={6}>
                         <List className={classes.listRoot}>
                             <ListItem className={`${classes.noTopPadding} ${classes.noBottomPadding}`}>
-                                <ListItemText primary="Photos" secondary="Url" />
+                                <ListItemText primary={url} secondary="Url" />
                             </ListItem>
                             <Divider component="li" />
                             <ListItem className={`${classes.noTopPadding} ${classes.noBottomPadding}`}>
-                                <ListItemText primary="Work" secondary="Reference url" />
+                                <ListItemText primary={refUrl} secondary="Reference url" />
                             </ListItem>
                         </List>
                     </Grid>
                 </Grid>
             </CardContent>
             <CardActions>
-                <Button size="small">Learn More</Button>
+                <Grid container justify="space-between" alignItems="baseline">
+                    <Button size="medium">Learn More</Button>
+                    <Button size="small" onClick={deleteScenario(id)}>Delete</Button>
+                </Grid>
             </CardActions>
         </Card>
     );

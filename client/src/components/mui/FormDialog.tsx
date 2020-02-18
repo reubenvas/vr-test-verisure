@@ -6,24 +6,24 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
-import ScenarioInputForm from './ScenarioInputForm';
+import scenarioStore from '../../store/scenarioStore';
 
-const FormDialog = () => {
+
+type propTypes = {
+    open: boolean;
+}
+
+const FormDialog = ({ open }: propTypes): React.ReactElement<propTypes> => {
     const [dialogOpen, setDialogOpen] = useState<boolean>(false);
-
     const [label, setLabel] = useState<string>('');
     const [url, setUrl] = useState<string>('');
     const [refUrl, setRefUrl] = useState<string>('');
-
     const [labelError, setLabelError] = useState<boolean>(false);
     const [urlError, setUrlError] = useState<boolean>(false);
     const [refUrlError, setRefUrlError] = useState<boolean>(false);
-
     const [submit, setSubmit] = useState<boolean>(false);
 
-    const openDialog = (): void => {
-        setDialogOpen(true);
-    };
+    const { addScenario, scenarios } = scenarioStore;
 
     const closeDialog = (): void => {
         setDialogOpen(false);
@@ -33,6 +33,7 @@ const FormDialog = () => {
         setLabelError(false);
         setUrlError(false);
         setRefUrlError(false);
+        setSubmit(false);
     };
 
 
@@ -45,70 +46,78 @@ const FormDialog = () => {
         if (error) {
             setError(false);
         }
+        if (submit) {
+            setSubmit(false);
+        }
     };
 
     const checkForError = (
         value: string,
         regex: RegExp,
         setError: React.Dispatch<React.SetStateAction<boolean>>,
-    ): boolean => {
+    ): void => {
         if (!regex.test(value)) {
             setError(true);
-            return true;
         }
-        return false;
     };
 
     const submitForm = (e: React.FormEvent): void => {
         e.preventDefault();
-
         setSubmit(true);
-
         // check for errrors
         checkForError(label, /.+/, setLabelError);
-        checkForError(url, /^https?:\/\/(www\.)[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/, setUrlError);
-        checkForError(refUrl, /^https?:\/\/(www\.)[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/, setRefUrlError);
-
-
-        // if (labelError || urlError || refUrlError) {
-        //     console.log('there is an aerror!!');
-        //     return;
-        // }
-        // console.log({ labelError, urlError, refUrlError });
-
-        // console.log('submiting form');
-        // closeDialog();
-
-        // // send further input information
+        checkForError(url, /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/, setUrlError);
+        checkForError(refUrl, /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/, setRefUrlError);
     };
 
-    const handleSubmit = () => {
-        // check for errrors
-
-
-        if (labelError || urlError || refUrlError) {
-            console.log('there is an aerror!!');
-            return;
+    useEffect(() => { // if dialog opens from button
+        if (open) {
+            setDialogOpen(open);
         }
-        console.log({ labelError, urlError, refUrlError });
-
-        console.log('submiting form');
-        closeDialog();
-
-        // send further input information
-    };
+    }, [open]);
 
     useEffect(() => {
+        const handleSubmit = (): void => {
+            // check for errrors
+            if (labelError || urlError || refUrlError) {
+                console.log('there is an aerror!!');
+                return;
+            }
+            // when no errors, submit
+            console.log('submiting form');
+            closeDialog();
+
+            const scenario = {
+                label,
+                url,
+                referenceUrl: refUrl,
+                cookiePath: 'backstop_data/engine_scripts/cookies.json',
+                readyEvent: '',
+                readySelector: '',
+                delay: 0,
+                hideSelectors: [],
+                removeSelectors: [],
+                hoverSelector: '',
+                clickSelector: '',
+                postInteractionWait: 0,
+                selectors: [],
+                selectorExpansion: true,
+                expect: 0,
+                misMatchThreshold: 0.1,
+                requireSameDimensions: true,
+            };
+            addScenario(scenario);
+
+            // send further input information
+        };
+
         if (submit) {
             handleSubmit();
         }
-    }, [submit]);
+    }, [submit, labelError, urlError, refUrlError, addScenario, label, url, refUrl]);
 
     return (
         <div>
-            <Button variant="outlined" color="primary" onClick={openDialog}>
-                Open form dialog
-            </Button>
             <Dialog open={dialogOpen} onClose={closeDialog} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">New scenario</DialogTitle>
                 <DialogContent>
@@ -159,7 +168,7 @@ const FormDialog = () => {
                         Cancel
                     </Button>
                     <Button onClick={submitForm} color="primary">
-                        Subscribe
+                        Add
                     </Button>
                 </DialogActions>
             </Dialog>

@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`DarkButton component snapshot renders 1`] = `
-<button>
-  Test
-</button>
-`;

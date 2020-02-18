@@ -1,17 +1,13 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Grid, { GridSpacing } from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper/Paper';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
+import Grid from '@material-ui/core/Grid';
 import ScenarioCard from './ScenarioCard';
+import scenarioStore from '../../store/scenarioStore';
 
 const topPadding = window.innerWidth > 800 ? 70 : 110;
 const bottomPadding = window.innerWidth > 800 ? 80 : 120;
-
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
@@ -29,52 +25,42 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 const SpacingGrid = (): React.ReactElement<{}> => {
-    const [spacing, setSpacing] = React.useState<GridSpacing>(2);
-    const classes = useStyles();
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        setSpacing(Number((event.target as HTMLInputElement).value) as GridSpacing);
+    const handleSpacing = (): 10 | 8 | 6 | 4 | 2 => {
+        switch (scenarioStore.scenarios.length) {
+        case 4:
+            return 8;
+        case 5:
+            return 6;
+        case 6:
+            return 4;
+        default:
+            if (scenarioStore.scenarios.length <= 3) {
+                return 10;
+            }
+            return 2;
+        }
     };
+
+    const classes = useStyles();
 
     return (
         <Grid container className={classes.root} justify="center" spacing={2}>
             <Grid item xs={5}>
-                <Grid container justify="center" spacing={spacing}>
-                    {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((value) => (
-                        <Grid key={value} item>
-                            {/* <Paper className={classes.paper} /> */}
-                            <ScenarioCard />
+                <Grid container justify="center" spacing={handleSpacing()}>
+                    {scenarioStore.scenarios.map(({ label, referenceUrl, url }, index) => (
+                        <Grid key={index} item>
+                            <ScenarioCard
+                                id={index}
+                                label={label}
+                                refUrl={referenceUrl}
+                                url={url}
+                            />
                         </Grid>
                     ))}
                 </Grid>
-            </Grid>
-            <Grid item xs={12}>
-                <Paper className={classes.control}>
-                    <Grid container>
-                        <Grid item>
-                            <FormLabel>spacing</FormLabel>
-                            <RadioGroup
-                                name="spacing"
-                                aria-label="spacing"
-                                value={spacing.toString()}
-                                onChange={handleChange}
-                                row
-                            >
-                                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
-                                    <FormControlLabel
-                                        key={value}
-                                        value={value.toString()}
-                                        control={<Radio />}
-                                        label={value.toString()}
-                                    />
-                                ))}
-                            </RadioGroup>
-                        </Grid>
-                    </Grid>
-                </Paper>
             </Grid>
         </Grid>
     );
 };
 
-export default SpacingGrid;
+export default observer(SpacingGrid);

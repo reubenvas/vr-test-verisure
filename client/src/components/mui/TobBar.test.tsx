@@ -1,10 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import UsersTable from './UsersTable';
+import TopBar from './TopBar';
 
 describe('DarkButton component', () => {
-    test('snapshot renders', async () => { // ERROR - doesn't snapshot after the component has fetched data
-        const component = renderer.create(<UsersTable />);
+    test('snapshot renders', () => {
+        const component = renderer.create(<TopBar />);
         const tree = component.toJSON();
         expect(tree).toMatchSnapshot();
     });

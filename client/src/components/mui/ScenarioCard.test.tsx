@@ -1,10 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import UserTableRow from './UserTableRow';
+import ScenarioCard from './ScenarioCard';
 
 describe('DarkButton component', () => {
     test('snapshot renders', () => {
-        const component = renderer.create(<UserTableRow id='1' url='http://google.com' referenceUrl='http://google.com' label='scenario test'/>);
+        const component = renderer.create(<ScenarioCard id={1} label='Test scenario card' url='https://test.com' refUrl='https://test.com' />);
         const tree = component.toJSON();
         expect(tree).toMatchSnapshot();
     });
