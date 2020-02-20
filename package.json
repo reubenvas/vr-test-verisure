@@ -34,9 +34,18 @@
     "author": "Reuben Vas",
     "license": "",
     "pkg": {
-        "scripts": "dist/**/*.js",
-        "assets": "client/dist/*"
+        "scripts": [
+            "*/dist/**/*.js",
+            "backstop_data/**/*.js"
+        ],
+        "assets": [
+            "client/dist/*.html",
+            "client/dist/*.css",
+            "node_modules/opn/xdg-open",
+            "node_modules/puppeteer/.local-chromium"
+        ]
     },
+    "bin": "./server/dist/index.js",
     "dependencies": {
         "@babel/runtime": "^7.8.0",
         "@material-ui/core": "^4.9.2",
@@ -44,9 +53,9 @@
         "body-parser": "^1.19.0",
         "compression": "^1.7.4",
         "express": "^4.17.1",
-        "localforage": "^1.7.3",
         "mobx": "^5.15.4",
-        "mobx-react": "^6.1.7",
+        "mobx-react-lite": "^1.5.2",
+        "node-fetch": "^2.6.0",
         "react": "^16.12.0",
         "react-dom": "^16.12.0",
         "whatwg-fetch": "3.0.0"

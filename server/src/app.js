@@ -8,14 +8,14 @@ import initEnvVars from '../../config/index';
 import { addScenariosToTest, createReferenceForTest, startTest } from './backstop';
 
 const app/* : express.Application */ = express();
-app.use(bodyParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 let directory = '';
 
 // Optimize for production: https://expressjs.com/en/advanced/best-practice-performance.html
 
 
 if (process.env.NODE_ENV === 'development') {
-    console.log('from dev in app');
     devAddOns(app);
     // The problem which causes it to not work is this dynamic import. Don't know why though
     // In production an error will occur when importing developmentAddOns statically
@@ -36,7 +36,8 @@ if (!process.env.TEST_GREETING) {
     initEnvVars();
 }
 
-console.log('This is the NODE_ENV:', process.env.NODE_ENV);
+// eslint-disable-next-line no-console
+console.log('Runnning on NODE_ENV:', process.env.NODE_ENV);
 
 
 app.get('/', (req, res) => {

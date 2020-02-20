@@ -1,8 +1,7 @@
-// eslint-disable-next-line max-classes-per-file
+
 import {
     decorate, observable, action, configure,
 } from 'mobx';
-import localForage from 'localforage';
 import { Scenario } from 'backstopjs';
 
 configure({ enforceActions: 'observed' });
@@ -12,6 +11,13 @@ class Store {
 
     addScenario = (scenario: Scenario): void => {
         this.scenarios.push(scenario);
+    }
+
+    changeScenarioKeyVal = (
+        index: number, key: string,
+        value: string | number | string[],
+    ): void => {
+        this.scenarios[index][key] = value;
     }
 
     removeScenario = (index: number): Scenario => {
@@ -24,6 +30,7 @@ class Store {
 decorate(Store, {
     scenarios: observable,
     addScenario: action,
+    changeScenarioKeyVal: action,
     removeScenario: action,
 });
 

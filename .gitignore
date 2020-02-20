@@ -4,3 +4,4 @@ client/src/api/db.json
 .env.*
 !.env.example
 backstop_data
+*.exe

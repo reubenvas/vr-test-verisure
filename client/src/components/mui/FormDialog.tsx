@@ -23,7 +23,7 @@ const FormDialog = ({ open }: propTypes): React.ReactElement<propTypes> => {
     const [refUrlError, setRefUrlError] = useState<boolean>(false);
     const [submit, setSubmit] = useState<boolean>(false);
 
-    const { addScenario, scenarios } = scenarioStore;
+    const { addScenario } = scenarioStore;
 
     const closeDialog = (): void => {
         setDialogOpen(false);
@@ -41,8 +41,8 @@ const FormDialog = ({ open }: propTypes): React.ReactElement<propTypes> => {
         setInput: React.Dispatch<React.SetStateAction<string>>,
         error: boolean,
         setError: React.Dispatch<React.SetStateAction<boolean>>,
-    ) => (e: any): void => {
-        setInput(e.target.value);
+    ) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        setInput(e.currentTarget.value);
         if (error) {
             setError(false);
         }
@@ -66,8 +66,8 @@ const FormDialog = ({ open }: propTypes): React.ReactElement<propTypes> => {
         setSubmit(true);
         // check for errrors
         checkForError(label, /.+/, setLabelError);
-        checkForError(url, /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/, setUrlError);
-        checkForError(refUrl, /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/, setRefUrlError);
+        checkForError(url, /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)$/, setUrlError);
+        checkForError(refUrl, /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)$/, setRefUrlError);
     };
 
     useEffect(() => { // if dialog opens from button
@@ -80,11 +80,8 @@ const FormDialog = ({ open }: propTypes): React.ReactElement<propTypes> => {
         const handleSubmit = (): void => {
             // check for errrors
             if (labelError || urlError || refUrlError) {
-                console.log('there is an aerror!!');
                 return;
             }
-            // when no errors, submit
-            console.log('submiting form');
             closeDialog();
 
             const scenario = {
@@ -123,10 +120,12 @@ const FormDialog = ({ open }: propTypes): React.ReactElement<propTypes> => {
                 <DialogContent>
                     <DialogContentText>
                         To generate a report, please add at least one sceanario.
-                        Add more details by clicking on &quot;More info&quot; later.
+                        Add more details by clicking on &quot;View more&quot;
+                        later on each scenario.
                     </DialogContentText>
                     <form onSubmit={submitForm}>
                         <TextField
+                            // eslint-disable-next-line jsx-a11y/no-autofocus
                             autoFocus
                             margin="dense"
                             id="label"

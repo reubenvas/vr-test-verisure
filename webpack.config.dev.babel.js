@@ -1,11 +1,17 @@
 // import the path package, as we are using babel,
 // 'require' is changed to 'import from'
-import path from 'path';
-import webpack from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import Dotenv from 'dotenv-webpack';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
+// import path from 'path';
+// import webpack from 'webpack';
+// import HtmlWebpackPlugin from 'html-webpack-plugin';
+// import Dotenv from 'dotenv-webpack';
+// import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // Webpack is configured by 'export'ing an object
 const config = {
@@ -36,7 +42,11 @@ const config = {
     // The target of the Webpack bundle for our current purpose is the web.
     // It could also be 'node', or 'elektron' for desktop apps
     target: 'web',
-    stats: 'errors-warnings',
+    stats: {
+        excludeAssets: [
+            'backstop_data',
+        ],
+    },
 
     // This informs Webpack, where it should create the DEV bundle.
     // Webpack in the current code does not actually create the physical files,
@@ -114,5 +124,5 @@ const config = {
     },
 };
 
-export default config;
+// export default config;
 module.exports = config;
