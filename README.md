@@ -1,125 +1,60 @@
-# JS Development Environment
+# UI for Backstop Vissual regression tool
 
-README will be updated every now and then and is in progress...
+This is an interface for the testing tool [BackstopJS](https://garris.github.io/BackstopJS/). BackstobJS is a visual regression testing tool which aims to compare website user interfaces and locate the vissual differences.
 
-Check this out if this repo will be used as a starterkit/template for other repos... <https://stackoverflow.com/questions/9257533/what-is-the-difference-between-origin-and-upstream-on-github/9257901#9257901> Add this repo in the new repo as remote upstream, then get new changes from here with `git fetch`
+## The interface
 
-## Git
+The interface follows the simple structure of first creating test scenarios and then, based on these, generate a report. For each scenario, 3 things are needed:
 
-### Download project
+- Label - the name we want to call this scenario
+- Url - the url for the website that might contain differenting content
+- Reference url - the url for the original website, the site that should be compared against.
 
-Run in bash:
+Add as many scenarios as you like. All will be added to the report.
 
-```bash
-git clone [git-web-repo-url]
+In the report each scenario is divided into a mobile-, tablet- and desktop view. Clicking any of these will display a more detailed view where you can click and drag with your mouse to see the diffs more detailed.
+
+### If inputting an url that doesn't exist
+
+If you have inputted an url that doesn't exist, the UI will not generate a report and stop in loading mode. If this happens, just reload the page and try again.
+
+## Installation
+
+1. Visit <https://github.com/reubenvas/vr-test-verisure> and read this descirption
+
+2. Install [Node.js](https://nodejs.org/en/). This is needed for running all javascript apps
+
+3. Download the app as zip. Click [here.](https://github.com/reubenvas/vr-test-verisure/archive/master.zip) Then unzip (extract) the directory. (You could also use the git cli instead)
+
+4. Open the terminal (powershell) inside this directory. See [this](https://www.addictivetips.com/windows-tips/open-powershell-in-a-specific-location/) instruction for easily opening powershell in your directory. (You could also use the shell command 'cd' instead)
+
+5. In the terminal, paste this command to download the necessary dendencies:
+
+```npm
+npm install
 ```
 
-### Create branch (and switch to that branch)
+6. Once finished, paste this command in the terminal to build the app for production:
 
-Run in bash:
-
-```bash
-git checkout -b [new-branch-name]
-```
-
-### Delete branch (locally and remotely)
-
-**Locally** - Run in bash:
-
-```bash
-git branch [-d or -D] [name-of-branch]
-```
-
-**Remotely** - Run in bash:
-
-```bash
-git push origin --delete [name-of-branch]
-```
-
-### View all branches
-
-Run in bash:
-
-```bash
-git branch -a
-```
-
-## Heroku
-
-### Initial creation of app
-
-Run in bash:
-
-```bash
-heroku create [NAME-OF-APP]
-```
-
-### Deploy code to app
-
-Run in bash after commiting:
-
-```bash
-git push heroku master
-```
-
-The application is now deployed. Ensure that at least one instance of the app is running: (I think this tells Heroku to run what's in "web" in Procfile):
-
-```bash
-heroku ps:scale web=1
-```
-
-Open the website:
-
-```bash
-herokou open
-```
-
-### Listen and see logs from app
-
-Run in bash:
-
-```bash
-heroku logs --tail
-```
-
-### Kill a build process
-
-Run in bash:
-
-```bash
-heroku plugins:install heroku-builds
-heroku builds:cancel -a YOUR_HEROKU_APP_NAME
-```
-
-### Add environment variables to Heroku (those in the .env.prod file)
-
-Run in bash:
-
-```bash
-heroku config:set $(cat config/.env.prod | sed '/^$/d; /#[[:print:]]*$/d')
-```
-
-#### See more info on <https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app>
-
-## Bash scripts
-
-Add bash scripts in the folder `scripts` and link to it in Npmscripts (in scripts in `package.json`) like so:
-
-```json
-"scripts": {
-   "build": "./build.sh"
-},
-````
-
-Also, make sure you put a hash bang at the top of your bash file `#!/usr/bin/env bash`.
-Additionally, make sure you have permissions to execute the file. Run:
-
-```bash
-chmod +x ./build.sh
-```
-
-Finally, to execute the newly created bash script, run:
-
-```bash
+```npm
 npm run build
 ```
+
+7. Once finished, start the app by pasting this command in the terminal:
+
+```npm
+npm run start:prod
+```
+
+8. Use the app by entering <http://localhost:3000/> in your preferable web browser
+
+To open and use the app, just:
+
+1. Open the terminal (powershell) inside this directory. See [this](https://www.addictivetips.com/windows-tips/open-powershell-in-a-specific-location/) instruction for easily opening powershell in your directory. (You could also use the shell command 'cd' instead)
+2. Then paste this command:
+
+```npm
+npm run start:prod
+```
+
+8. Use the app by entering <http://localhost:3000/> in your preferable web browser

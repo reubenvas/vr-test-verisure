@@ -4,13 +4,11 @@
 // import path from 'path';
 // import webpack from 'webpack';
 // import HtmlWebpackPlugin from 'html-webpack-plugin';
-// import Dotenv from 'dotenv-webpack';
 // import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // Webpack is configured by 'export'ing an object
@@ -73,9 +71,6 @@ const config = {
         new webpack.LoaderOptionsPlugin({
             debug: true,
             noInfo: false,
-        }),
-        new Dotenv({
-            path: `./config/.env.${process.env.NODE_ENV === 'production' ? 'prod' : 'dev'}`,
         }),
         new MiniCssExtractPlugin({
             filename: '[name].css',

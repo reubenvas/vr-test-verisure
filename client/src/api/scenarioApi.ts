@@ -1,4 +1,3 @@
-import 'whatwg-fetch';
 import { Scenario } from 'backstopjs';
 
 const baseUrl = '/api/';

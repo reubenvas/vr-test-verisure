@@ -4,7 +4,6 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 
 import devAddOns from './helpers/developmentAddOns';
-import initEnvVars from '../../config/index';
 import { addScenariosToTest, createReferenceForTest, startTest } from './backstop';
 
 const app/* : express.Application */ = express();
@@ -33,13 +32,9 @@ if (process.env.NODE_ENV === 'development') {
     directory = 'dist';
 }
 
-if (!process.env.TEST_GREETING) {
-    process.env.NODE_ENV = 'production';
-    initEnvVars();
-}
 
 // eslint-disable-next-line no-console
-console.log('Runnning on NODE_ENV:', process.env.NODE_ENV);
+console.log('Running on node environment:', process.env.NODE_ENV);
 
 
 app.get('/', (req, res) => {

@@ -11,16 +11,11 @@ export default async (app) => {
     const webpackDevMiddleware = require('webpack-dev-middleware');
     const webpackHotMiddleware = require('webpack-hot-middleware');
     const config = require('../../../webpack.config.dev.babel');
-    const initEnvVars = require('../../../config');
     /*     eslint-enable global-require */
 
     // const webpack = (await import('webpack')).default;
     // const webpackDevMiddleWare = (await import('webpack-dev-middleware')).default;
     // const config = (await import('../../../webpack.config.dev.babel')).default;
-    // const initEnvVars = (await import('../../../config')).default;
-
-    // in development we have to initialize the local env variables ourselves
-    initEnvVars();
 
     const compiler = webpack(config);
     const hotMiddleware = webpackHotMiddleware(compiler);
