@@ -27,10 +27,24 @@ const useStyles = makeStyles(() => createStyles({
 const BottomBar = (): React.ReactElement<{}> => {
     const [snackbarOpen, setSnackbarOpen] = React.useState<boolean>(false);
     const [buttonDisabled, setButtonDisabled] = React.useState<boolean>(false);
+    const [snackbarMessage, setSnackbarMessage] = React.useState<string>('');
 
+    let timeoutId: NodeJS.Timeout;
 
-    const sendScenaroisToServerAndRedirect = async (): Promise<void> => {
+    const sendScenarosToServer = async (): Promise<void> => {
+        if (scenarioStore.scenarios.length === 0) {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+            setSnackbarMessage('Before generating a report you have to add at least one scenario.');
+            setSnackbarOpen(true);
+            timeoutId = setTimeout(() => {
+                setSnackbarOpen(false);
+            }, 1500);
+            return;
+        }
         const scenarios = JSON.stringify(scenarioStore.scenarios);
+        setSnackbarMessage('Generating report... This might take a few minutes');
         setSnackbarOpen(true);
         setButtonDisabled(true);
         await postScenarios(scenarios);
@@ -43,10 +57,10 @@ const BottomBar = (): React.ReactElement<{}> => {
         <AppBar position="fixed" color="primary" className={classes.appBar}>
             <Toolbar>
                 <Grid container justify='center' className={classes.popoutButton}>
-                    <Button variant="contained" color="secondary" disabled={buttonDisabled} onClick={sendScenaroisToServerAndRedirect}>Generate report</Button>
+                    <Button variant="contained" color="secondary" disabled={buttonDisabled} onClick={sendScenarosToServer}>Generate report</Button>
                 </Grid>
             </Toolbar>
-            <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }} open={snackbarOpen} message='Generating report... This might take a few minutes' />
+            <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }} open={snackbarOpen} message={snackbarMessage} />
         </AppBar>
     );
 };
