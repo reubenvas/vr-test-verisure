@@ -10,6 +10,8 @@ import { addScenariosToTest, createReferenceForTest, startTest } from './backsto
 const app/* : express.Application */ = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('client/public'));
+
 let directory = '';
 
 // Optimize for production: https://expressjs.com/en/advanced/best-practice-performance.html

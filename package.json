@@ -40,9 +40,7 @@
         ],
         "assets": [
             "client/dist/*.html",
-            "client/dist/*.css",
-            "node_modules/opn/xdg-open",
-            "node_modules/puppeteer/.local-chromium"
+            "client/dist/*.css"
         ]
     },
     "bin": "./server/dist/index.js",
