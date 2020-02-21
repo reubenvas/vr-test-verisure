@@ -58,4 +58,4 @@ npm run start:prod
 npm run start:prod
 ```
 
-1. Use the app by entering <http://localhost:3000/> in your preferable web browser
+3. Use the app by entering <http://localhost:3000/> in your preferable web browser
