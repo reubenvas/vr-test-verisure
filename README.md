@@ -48,13 +48,14 @@ npm run start:prod
 
 8. Use the app by entering <http://localhost:3000/> in your preferable web browser
 
-To open and use the app, just:
+### To open and use the app, just:
 
 1. Open the terminal (powershell) inside this directory. See [this](https://www.addictivetips.com/windows-tips/open-powershell-in-a-specific-location/) instruction for easily opening powershell in your directory. (You could also use the shell command 'cd' instead)
+
 2. Then paste this command:
 
 ```npm
 npm run start:prod
 ```
 
-8. Use the app by entering <http://localhost:3000/> in your preferable web browser
+1. Use the app by entering <http://localhost:3000/> in your preferable web browser
